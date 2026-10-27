@@ -1,0 +1,36 @@
+﻿table,what I fixed,rows before,rows after
+customers,Removed duplicate rows,5050,5000
+orders,Removed duplicate rows,15075,15000
+order_items,Removed duplicate rows,37763,37501
+products,"Checked duplicates, none found",800,800
+shipments,"Checked duplicates, none found",15000,15000
+returns,"Checked duplicates, none found",1200,1200
+payments,"Checked duplicates, none found",15000,15000
+orders,Parsed mixed dates into order_datetime_clean,15000,15000
+shipments,Parsed mixed dates into ship_date_clean and delivered_date_clean,15000,15000
+returns,Parsed mixed dates into return_request_date_clean,1200,1200
+products,Standardized 18 category spellings into 8 (category_clean),800,800
+products,"Removed peso signs and commas, made unit_price and unit_cost numbers (_clean columns)",800,800
+shipments,"Lead time only for Delivered shipments, 3149 other shipments had delivered dates that cannot be trusted",15000,15000
+orders,"Flagged 43 orders with unknown customer CUST999999 (customer_orphan), kept for delivery and returns analysis",15000,15000
+order_items,"Flagged 129 items with unknown product PROD00000 (product_orphan), left out of category analysis only",37501,37501
+order_items,"Removed 372 order lines with quantity 0 and made quantity_clean (2 of them were product orphans, so 127 orphan items remain)",37501,37129
+order_items,Removed peso signs and commas in unit_price_at_purchase (unit_price_at_purchase_clean),37129,37129
+order_items,"Filled 2217 blank prices with the catalog price of the same product (price_was_blank marks them), 9 stay blank because the product is unknown. Non blank prices matched the catalog 100 percent",37129,37129
+orders,"23 orders have no order lines left after the quantity 0 removal, kept for delivery and returns analysis",15000,15000
+orders,"Made discount_pct and shipping_fee numbers (_clean columns), 756 and 470 blanks kept as blank, not guessed",15000,15000
+returns,"Made refund_amount a number (refund_amount_clean), 187 blanks kept as blank",1200,1200
+returns,Filled 110 blank refunded_flag with Unknown (refunded_flag_clean),1200,1200
+products,"Made stock_qty a number (stock_qty_clean, 19 blanks kept) and merged pc, pcs, piece into pc (uom_clean)",800,800
+customers,"Standardized gender (M, F, Male, Female, female, blank) into Male, Female, Unknown (gender_clean)",5000,5000
+customers,"Made age a number (age_clean), 203 ages under 13 (48 of them negative) set to blank, 149 were already blank",5000,5000
+customers,Filled 264 blank loyalty_tier with Unknown (loyalty_tier_clean),5000,5000
+customers,"Checked emails, 225 wrong ones (missing @ or dot) and 104 blanks, email_clean keeps only good emails and email_valid shows which ones are good",5000,5000
+customers,"Checked phones, 133 short numbers made blank in phone_clean (phone_valid marks the good ones, 11 digits starting with 09), 145 were already blank",5000,5000
+customers,Parsed 3 mixed signup_date styles into signup_date_clean (slash dates read as month first),5000,5000
+payments,"Removed peso signs and commas in amount_paid and made it a number (amount_paid_clean), 878 blanks kept as blank, 657 amounts are 0 and kept as they are",15000,15000
+payments,Parsed mixed payment_date into payment_date_clean (slash dates read as month first),15000,15000
+shipments,"Checked order dates: 7397 shipments have a ship_date before the order date (21 on the same day), kept as they are, lead time uses ship date to delivered date so it is not affected, order to ship time is not analyzed",15000,15000
+returns,"Checked return dates: 583 returns were requested before the order date, kept as they are and noted as a data limitation",1200,1200
+returns,"Checked refunds: 248 returns with refunded_flag No have a refund amount and 99 with Yes have none, kept as they are, refund amounts are not used for the return rate",1200,1200
+returns,"Return rate is counted from the returns table (1200 returns, one per order) because order_status Returned only matches 40 of them",1200,1200

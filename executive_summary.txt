@@ -1,0 +1,13 @@
+This project looks at how well we deliver orders and what causes returns, using 15,000 orders from 7 tables.
+I cleaned the data first (documented in a 35-line cleaning log, original files untouched), then built the analysis in Python.
+77.87% of shipments were delivered, 17.96% are still in transit, and 4.17% were returned to sender or lost.
+Delivered shipments take 1 to 7 days, about 4.00 days on average, and all five couriers are within 0.06 days of each other.
+1,200 of 15,000 orders were returned, an overall return rate of 8.00%.
+NinjaVan (8.81%), J&T (8.61%) and GrabExpress (8.44%) are above the overall rate, while 2GO (7.01%) and LBC (7.11%) are below it.
+J&T also has the lowest delivered rate (76.59%) and the highest returned to sender rate (3.58%).
+70.33% of returns (844) come from reasons we control: defective, missing parts, late delivery, wrong item and damaged item.
+Return rates are similar across categories (7.47% to 8.65%), so category is not the main driver.
+Top recommendation 1: add a quality and packing check before dispatch to reduce the returns we cause.
+Top recommendation 2: track return rate and lost shipments for each courier every month, and review NinjaVan, J&T and GrabExpress.
+Three more recommendations: reduce lost deliveries (starting with J&T), set a delivery time target, and improve date and refund data.
+Data note: the data is synthetic and some dates are out of order (for example, shipped before ordered), so lead time results need care.
